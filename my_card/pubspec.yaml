@@ -38,4 +38,13 @@ flutter:
   
   assets:
     - images/
-  
+    
+  fonts:
+    - family: Righteous
+      fonts:
+        - asset: fonts/Righteous/Righteous-Regular.ttf
+          style: normal
+    - family: Quicksand
+      fonts:
+        - asset: fonts/Quicksand/Quicksand-VariableFont_wght.ttf
+          weight: 600
