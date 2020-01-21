@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'Classes/Questions.dart';
+import 'models/Questions.dart';
 
 void main() => runApp(Quizzler());
 
