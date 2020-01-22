@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'models/QuestionsClass.dart';
+import 'controllers/QuestionsClass.dart';
 
 //creating object from question class
 QuestionsController questions= QuestionsController();
@@ -46,7 +46,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions.qList[qNum].questionText,
+                questions.getQuestionText(qNum),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -70,7 +70,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = questions.qList[qNum].questionAnswer;
+                bool correctAnswer = questions.getQuestionAnwer(qNum);
                 if (correctAnswer == true) {
                   answerIcons.add(Icon(Icons.check, color: Colors.green));
                   print('user got it Right ..');
@@ -102,7 +102,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = questions.qList[qNum].questionAnswer;
+                bool correctAnswer = questions.getQuestionAnwer(qNum);
                 if (correctAnswer == false) {
                   answerIcons.add(Icon(Icons.check, color: Colors.green));
                   print('user got it Right ..');

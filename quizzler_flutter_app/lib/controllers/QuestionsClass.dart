@@ -1,8 +1,9 @@
-import 'package:quizzler_flutter_app/controllers/Questions.dart';
+import 'package:quizzler_flutter_app/models/Questions.dart';
 
 class QuestionsController{
 
-    List<Question> qList =[
+ //variabls
+    List<Question> _qList =[
     Question('Some cats are actually allergic to humans', true),
     Question('You can lead a cow down stairs but not up stairs.', false),
     Question('Approximately one quarter of human bones are in the feet.', true),
@@ -30,4 +31,12 @@ class QuestionsController{
         true)
   ];
 
+
+//Methods
+    String getQuestionText(int questionNumbre){
+      return _qList[questionNumbre].questionText;
+    }
+      bool getQuestionAnwer(int questionNumbre){
+      return _qList[questionNumbre].questionAnswer;
+    }
 }
