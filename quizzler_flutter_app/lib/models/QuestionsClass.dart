@@ -1,7 +1,8 @@
-import 'package:quizzler_flutter_app/models/Questions.dart';
+import 'package:quizzler_flutter_app/controllers/Questions.dart';
 
 class QuestionsController{
-    List<Question> qList = [
+
+    List<Question> qList =[
     Question('Some cats are actually allergic to humans', true),
     Question('You can lead a cow down stairs but not up stairs.', false),
     Question('Approximately one quarter of human bones are in the feet.', true),
