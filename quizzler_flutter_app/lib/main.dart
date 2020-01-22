@@ -32,8 +32,7 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> answerIcons = [];
-  int qNum = 0;
-
+  
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -46,7 +45,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions.getQuestionText(qNum),
+                questions.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -70,7 +69,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = questions.getQuestionAnwer(qNum);
+                bool correctAnswer = questions.getQuestionAnwer();
                 if (correctAnswer == true) {
                   answerIcons.add(Icon(Icons.check, color: Colors.green));
                   print('user got it Right ..');
@@ -81,9 +80,7 @@ class _QuizPageState extends State<QuizPage> {
 
                 setState(() {
                   //print(qNum);
-                  if (qNum <= 2) {
-                    qNum++;
-                  }
+                 questions.nextQuestion();
                 });
               },
             ),
@@ -102,7 +99,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = questions.getQuestionAnwer(qNum);
+                bool correctAnswer = questions.getQuestionAnwer();
                 if (correctAnswer == false) {
                   answerIcons.add(Icon(Icons.check, color: Colors.green));
                   print('user got it Right ..');
@@ -112,9 +109,7 @@ class _QuizPageState extends State<QuizPage> {
                 }
 
                 setState(() {
-                  if (qNum <= 2) {
-                    qNum++;
-                  }
+                   questions.nextQuestion();
                 });
               },
             ),

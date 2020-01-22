@@ -3,6 +3,7 @@ import 'package:quizzler_flutter_app/models/Questions.dart';
 class QuestionsController{
 
  //variabls
+    int _qNum = 0;
     List<Question> _qList =[
     Question('Some cats are actually allergic to humans', true),
     Question('You can lead a cow down stairs but not up stairs.', false),
@@ -33,10 +34,19 @@ class QuestionsController{
 
 
 //Methods
-    String getQuestionText(int questionNumbre){
-      return _qList[questionNumbre].questionText;
+ void nextQuestion(){
+   if( _qNum < _qList.length-1){
+     _qNum++;
+     print(_qNum);
+     print( _qList.length);
+
+   }
+ }
+    String getQuestionText(){
+      return _qList[_qNum].questionText;
     }
-      bool getQuestionAnwer(int questionNumbre){
-      return _qList[questionNumbre].questionAnswer;
+      bool getQuestionAnwer(){
+      return _qList[_qNum].questionAnswer;
     }
+ 
 }
