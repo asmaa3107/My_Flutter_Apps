@@ -32,7 +32,16 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> answerIcons = [];
-  
+  void checkUserAnswer(bool userAnswerValue){
+   bool correctAnswer = questions.getQuestionAnwer();
+                if (correctAnswer == userAnswerValue) {
+                  answerIcons.add(Icon(Icons.check, color: Colors.green));
+                  print('user got it Right ..');
+                } else {
+                  answerIcons.add(Icon(Icons.close, color: Colors.red));
+                  print('user got it Wrong ..');
+                }
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -69,15 +78,8 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = questions.getQuestionAnwer();
-                if (correctAnswer == true) {
-                  answerIcons.add(Icon(Icons.check, color: Colors.green));
-                  print('user got it Right ..');
-                } else {
-                  answerIcons.add(Icon(Icons.close, color: Colors.red));
-                  print('user got it Wrong ..');
-                }
-
+             
+checkUserAnswer(true);
                 setState(() {
                   //print(qNum);
                  questions.nextQuestion();
@@ -99,14 +101,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = questions.getQuestionAnwer();
-                if (correctAnswer == false) {
-                  answerIcons.add(Icon(Icons.check, color: Colors.green));
-                  print('user got it Right ..');
-                } else {
-                  answerIcons.add(Icon(Icons.close, color: Colors.red));
-                  print('user got it Wrong ..');
-                }
+              checkUserAnswer(false);
 
                 setState(() {
                    questions.nextQuestion();
