@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import 'controllers/QuestionsClass.dart';
-
 //creating object from question class
 QuestionsController questions= QuestionsController();
 
@@ -32,8 +32,16 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> answerIcons = [];
+  // Alert Alert
   void checkUserAnswer(bool userAnswerValue){
-   bool correctAnswer = questions.getQuestionAnwer();
+    setState(() {
+   
+      if(questions.isFinished()){
+        Alert(context: context, title: "YAHOOOO!", desc: "Done! you finished your Quiz").show();
+        answerIcons = [];
+        questions.reset();
+      }else{
+         bool correctAnswer = questions.getQuestionAnwer();
                 if (correctAnswer == userAnswerValue) {
                   answerIcons.add(Icon(Icons.check, color: Colors.green));
                   print('user got it Right ..');
@@ -41,6 +49,10 @@ class _QuizPageState extends State<QuizPage> {
                   answerIcons.add(Icon(Icons.close, color: Colors.red));
                   print('user got it Wrong ..');
                 }
+          questions.nextQuestion();
+    }//endelse
+    });
+
   }
   @override
   Widget build(BuildContext context) {
@@ -80,10 +92,7 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
              
 checkUserAnswer(true);
-                setState(() {
-                  //print(qNum);
-                 questions.nextQuestion();
-                });
+             
               },
             ),
           ),
@@ -103,9 +112,6 @@ checkUserAnswer(true);
               onPressed: () {
               checkUserAnswer(false);
 
-                setState(() {
-                   questions.nextQuestion();
-                });
               },
             ),
           ),

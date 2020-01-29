@@ -1,10 +1,9 @@
 import 'package:quizzler_flutter_app/models/Questions.dart';
 
-class QuestionsController{
-
- //variabls
-    int _qNum = 0;
-    List<Question> _qList =[
+class QuestionsController {
+  //variabls
+  int _qNum = 0;
+  List<Question> _qList = [
     Question('Some cats are actually allergic to humans', true),
     Question('You can lead a cow down stairs but not up stairs.', false),
     Question('Approximately one quarter of human bones are in the feet.', true),
@@ -32,21 +31,36 @@ class QuestionsController{
         true)
   ];
 
-
 //Methods
- void nextQuestion(){
-   if( _qNum < _qList.length-1){
-     _qNum++;
-     print(_qNum);
-     print( _qList.length);
+  void nextQuestion() {
+    if (_qNum < _qList.length - 1) {
+      _qNum++;
+      print(_qNum);
+      print(_qList.length);
+    }
+  }
 
-   }
- }
-    String getQuestionText(){
-      return _qList[_qNum].questionText;
+  String getQuestionText() {
+    return _qList[_qNum].questionText;
+  }
+
+  bool getQuestionAnwer() {
+    return _qList[_qNum].questionAnswer;
+  }
+
+  bool isFinished() {
+    if (_qNum>= _qList.length - 1) {
+      print('isfinished=true');
+      return true;
     }
-      bool getQuestionAnwer(){
-      return _qList[_qNum].questionAnswer;
+    else{
+      print('isfinished=false');
+      return false;
     }
- 
+  }
+
+  void reset(){
+    _qNum=0;
+  }
+
 }
