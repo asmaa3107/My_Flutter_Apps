@@ -20,32 +20,72 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: ReuseableCard(),
+                  child: ReuseableCard(
+                    colour: Color(0xFF1D1F33)
+                    ),
                 ),
                 Expanded(
-                  child: ReuseableCard(),
+                  child: ReuseableCard( colour: Color(0xFF1D1F33)
+                   ),
                 ),
               ],
             ),
           ),
           Expanded(
             // flex: 2,
-            child: ReuseableCard(),
+            child: ReuseableCard( colour: Color(0xFF1D1F33)
+                   ),
           ),
           Expanded(
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: ReuseableCard(),
+                  child: ReuseableCard( colour: Color(0xFF1D1F33)
+                   ),
                 ),
                 Expanded(
-                  child: ReuseableCard(),
+                  child: ReuseableCard( 
+                    colour: Color(0xFF1D1F33)
+                   ),
                 ),
               ],
             ),
           ),
         ],
       ),
+
+    );
+  }
+}
+
+class ReuseableCard extends StatelessWidget {
+
+ReuseableCard({@required this.colour});
+final Color colour;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(15.0),
+      decoration: BoxDecoration(
+          color: colour, borderRadius: BorderRadius.circular(15.0)),
+    );
+  }
+}
+
+
+
+
+
+
+
+
+
+
+  // const ReuseableCard({
+  //   Key key,
+  // }) : super(key: key);
+// note! using key to trace widget لو هعمل انيمشان مثلا وعايزه اسليكت الودجت ديه 
 
       // floatingActionButton: FloatingActionButton(
       //   backgroundColor: Theme.of(context).accentColor,
@@ -54,21 +94,3 @@ class _InputPageState extends State<InputPage> {
       //     color: Colors.white,
       //   ),
       // ),
-    );
-  }
-}
-
-class ReuseableCard extends StatelessWidget {
-  const ReuseableCard({
-    Key key,
-  }) : super(key: key);
-// note! using key to trace widget
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-          color: Color(0xFF1D1F33), borderRadius: BorderRadius.circular(15.0)),
-    );
-  }
-}
