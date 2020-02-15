@@ -7,7 +7,9 @@ const  double btnHight = 80.0;
 const  Color boxColor = Color(0xFF1D1F33);
 const  Color boxInactiveColor = Color(0xFF111328);
 const  Color secondryColor = Color(0xFFEB1555);
-
+enum Gender{
+  male,female,
+}
 
 class InputPage extends StatefulWidget {
   @override
@@ -15,24 +17,8 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Color maleCardCoulor   = boxInactiveColor;
-  Color femaleCardCoulor = boxInactiveColor;
-  //1 for male 2 for woman
-void updateColor(int gender){
-  if (gender==1){
-    if (maleCardCoulor== boxInactiveColor)
-         { maleCardCoulor=boxColor;
-          femaleCardCoulor=boxInactiveColor;}
-    else maleCardCoulor = boxInactiveColor;
-  }
-  else if(gender==2){
- if (femaleCardCoulor== boxInactiveColor)
-        {  femaleCardCoulor=boxColor;
-          maleCardCoulor=boxInactiveColor;
-        }
-    else femaleCardCoulor = boxInactiveColor;
-  }
-}
+  Gender selectedGender;
+  
  @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,11 +36,11 @@ void updateColor(int gender){
                   child:  GestureDetector(
                   onTap: () {
                     setState(() {
-                      updateColor(1);
+                      selectedGender=Gender.male;
                     });
                   },
                     child: ReuseableCard(
-                      colour:maleCardCoulor , 
+                      colour:selectedGender == Gender.male ? boxColor : boxInactiveColor , 
                        cardChild:IconDrawer(
                         lable: 'Male',
                         icon:FontAwesomeIcons.mars ,
@@ -67,11 +53,11 @@ void updateColor(int gender){
                      child:  GestureDetector(
                  onTap: () {
                     setState(() {
-                      updateColor(2);
+                      selectedGender=Gender.female;
                     });
                   },
                     child: ReuseableCard( 
-                      colour: femaleCardCoulor,
+                     colour:selectedGender == Gender.female ? boxColor : boxInactiveColor , 
                       cardChild:  
                       IconDrawer(
                         lable: 'Female',
@@ -135,7 +121,25 @@ void updateColor(int gender){
 //every time it destorying and rebuilt
 
 
-
+// if(selectedGender == Gender.male) ? '' : ';
+//   Color maleCardCoulor   = boxInactiveColor;
+//   Color femaleCardCoulor = boxInactiveColor;
+//   //1 for male 2 for woman insted of lots of comments use enum instead
+// void updateColor(Gender gender){
+//   if (gender== Gender.male){
+//     if (maleCardCoulor== boxInactiveColor)
+//          { maleCardCoulor=boxColor;
+//           femaleCardCoulor=boxInactiveColor;}
+//     else maleCardCoulor = boxInactiveColor;
+//   }
+//   else if(gender==Gender.female){
+//  if (femaleCardCoulor== boxInactiveColor)
+//         {  femaleCardCoulor=boxColor;
+//           maleCardCoulor=boxInactiveColor;
+//         }
+//     else femaleCardCoulor = boxInactiveColor;
+//   }
+// }
 
   // const ReuseableCard({
   //   Key key,
