@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'widgets/reuseableCard_widget.dart';
 import 'widgets/icon_drawer_widget.dart';
-//widgets variables
-const  double btnHight = 80.0;
-const  Color boxColor = Color(0xFF1D1F33);
-const  Color boxInactiveColor = Color(0xFF111328);
-const  Color secondryColor = Color(0xFFEB1555);
+import 'package:bmi_calculator/constanses.dart';
 
+//widgets variables
+
+enum Gender {
+  male,
+  female,
+}
 
 class InputPage extends StatefulWidget {
   @override
@@ -15,25 +17,9 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Color maleCardCoulor   = boxInactiveColor;
-  Color femaleCardCoulor = boxInactiveColor;
-  //1 for male 2 for woman
-void updateColor(int gender){
-  if (gender==1){
-    if (maleCardCoulor== boxInactiveColor)
-         { maleCardCoulor=boxColor;
-          femaleCardCoulor=boxInactiveColor;}
-    else maleCardCoulor = boxInactiveColor;
-  }
-  else if(gender==2){
- if (femaleCardCoulor== boxInactiveColor)
-        {  femaleCardCoulor=boxColor;
-          maleCardCoulor=boxInactiveColor;
-        }
-    else femaleCardCoulor = boxInactiveColor;
-  }
-}
- @override
+  Gender selectedGender;
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       //  backgroundColor:Theme.of(context).primaryColor,
@@ -41,42 +27,42 @@ void updateColor(int gender){
         title: Text('BMI CALCULATOR'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
             // flex: 1,
             child: Row(
               children: <Widget>[
-              Expanded( 
-                  child:  GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      updateColor(1);
-                    });
-                  },
-                    child: ReuseableCard(
-                      colour:maleCardCoulor , 
-                       cardChild:IconDrawer(
-                        lable: 'Male',
-                        icon:FontAwesomeIcons.mars ,
-                        ),
-                      ),
+                Expanded(
+                  child: ReuseableCard(
+                    onSelected: () {
+                      setState(() {
+                        selectedGender = Gender.male;
+                      });
+                    },
+                    colour: selectedGender == Gender.male
+                        ? kBoxColor
+                        : kBoxInactiveColor,
+                    cardChild: IconDrawer(
+                      lable: 'Male',
+                      icon: FontAwesomeIcons.mars,
+                    ),
                   ),
                 ),
-              
-                   Expanded(
-                     child:  GestureDetector(
-                 onTap: () {
-                    setState(() {
-                      updateColor(2);
-                    });
-                  },
-                    child: ReuseableCard( 
-                      colour: femaleCardCoulor,
-                      cardChild:  
-                      IconDrawer(
-                        lable: 'Female',
-                        icon:FontAwesomeIcons.venus ,),
-                     ),
+                Expanded(
+                  child: ReuseableCard(
+                    colour: selectedGender == Gender.female
+                        ? kBoxColor
+                        : kBoxInactiveColor,
+                    cardChild: IconDrawer(
+                      lable: 'Female',
+                      icon: FontAwesomeIcons.venus,
+                    ),
+                    onSelected: () {
+                      setState(() {
+                        selectedGender = Gender.female;
+                      });
+                    },
                   ),
                 ),
               ],
@@ -84,68 +70,131 @@ void updateColor(int gender){
           ),
           Expanded(
             // flex: 2,
-            child: ReuseableCard( colour: boxColor
-                   ),
+            child: ReuseableCard(
+              colour: kBoxColor,
+              cardChild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text('Hight', style: kTextStyle),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: <Widget>[
+                      Text(
+                        '180',
+                        style: kBigTextStyle,
+                      ),
+                      Text(' cm',style:kTextStyle,)
+                    ],
+                  )
+                ],
+              ),
+            ),
           ),
           Expanded(
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: ReuseableCard( colour: boxColor
-                   ),
+                  child: ReuseableCard(
+                    colour: kBoxColor,
+                    cardChild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+
+                      children: <Widget>[
+                        Text('Weight', style: kTextStyle),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              '180',
+                              style: kBigTextStyle,
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
                 ),
                 Expanded(
-                  child: ReuseableCard( 
-                    colour: boxColor
-                   ),
+                  child: ReuseableCard(
+                    colour: kBoxColor,
+                    cardChild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+
+                      children: <Widget>[
+                        Text('Age', style: kTextStyle),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              '180',
+                              style: kBigTextStyle,
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
                 ),
-              
               ],
             ),
           ),
           Container(
-                   color: secondryColor,
-                   margin: EdgeInsets.only(top: 10.0),
-                   height: btnHight,
-                   width: double.infinity,
-                   child: Center(
-                     child: Text
-                     (
-                       'Calculate Your BMI'.toUpperCase(),
-                        style:TextStyle(
-                            color: Colors.white,
-                            fontSize: 25.0,
-                            // fontFamily:
-                            
-                        ), 
-                     ),
-                   ),
+            color: kSecondryColor,
+            margin: EdgeInsets.only(top: 10.0),
+            height: kBtnHight,
+            width: double.infinity,
+            child: Center(
+              child: Text(
+                'Calculate Your BMI'.toUpperCase(),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25.0,
+                  // fontFamily:
                 ),
+              ),
+            ),
+          ),
         ],
       ),
-
     );
   }
 }
-
-
 
 //final attribute cant assign value to it more than once
 //!note : we use final with statless widget
 //every time it destorying and rebuilt
 
+// if(selectedGender == Gender.male) ? '' : ';
+//   Color maleCardCoulor   = boxInactiveColor;
+//   Color femaleCardCoulor = boxInactiveColor;
+//   //1 for male 2 for woman insted of lots of comments use enum instead
+// void updateColor(Gender gender){
+//   if (gender== Gender.male){
+//     if (maleCardCoulor== boxInactiveColor)
+//          { maleCardCoulor=boxColor;
+//           femaleCardCoulor=boxInactiveColor;}
+//     else maleCardCoulor = boxInactiveColor;
+//   }
+//   else if(gender==Gender.female){
+//  if (femaleCardCoulor== boxInactiveColor)
+//         {  femaleCardCoulor=boxColor;
+//           maleCardCoulor=boxInactiveColor;
+//         }
+//     else femaleCardCoulor = boxInactiveColor;
+//   }
+// }
 
+// const ReuseableCard({
+//   Key key,
+// }) : super(key: key);
+// note! using key to trace widget لو هعمل انيمشان مثلا وعايزه اسليكت الودجت ديه
 
-
-  // const ReuseableCard({
-  //   Key key,
-  // }) : super(key: key);
-// note! using key to trace widget لو هعمل انيمشان مثلا وعايزه اسليكت الودجت ديه 
-
-      // floatingActionButton: FloatingActionButton(
-      //   backgroundColor: Theme.of(context).accentColor,
-      //   child: Icon(
-      //     Icons.add,
-      //     color: Colors.white,
-      //   ),
-      // ),
+// floatingActionButton: FloatingActionButton(
+//   backgroundColor: Theme.of(context).accentColor,
+//   child: Icon(
+//     Icons.add,
+//     color: Colors.white,
+//   ),
+// ),

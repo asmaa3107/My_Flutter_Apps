@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-const textStyle = TextStyle(fontSize: 18.0,color: Color(0xFF8D8E98),);
+
+import '../constanses.dart';
 class IconDrawer extends StatelessWidget {
  IconDrawer({
     @required this.lable,this.icon
@@ -19,7 +20,7 @@ final IconData icon;
               ),
             SizedBox(height: 15.0,),
             Text(
-              lable ,style: textStyle,
+              lable ,style: kTextStyle,
         )
       ],
     );
