@@ -85,20 +85,35 @@ class _InputPageState extends State<InputPage> {
                         height.toString(),
                         style: kBigTextStyle,
                       ),
-                      Text(' cm',style:kTextStyle,)
+                      Text(
+                        ' cm',
+                        style: kTextStyle,
+                      )
                     ],
                   ),
-                  Slider(
-                    value: height.toDouble(),
-                     min: 120.0,
-                     max: 220.0,
-                    activeColor: kSecondryColor,
-                    inactiveColor: Colors.grey,
-                    onChanged: (double newValue){
-                        setState(() {
-                          height= newValue.round();
-                        });
-                  })
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      //add slider active and inactive color
+                      inactiveTrackColor: Colors.grey,
+                      activeTrackColor: Colors.white,
+                      // color slider  and its overlay
+                      thumbColor: kSecondryColor,
+                      overlayColor: kSecondryColor.withOpacity(0.16),
+                     // drow slider shape and its overlay
+                      thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                      overlayShape:  RoundSliderOverlayShape(overlayRadius: 22.0),
+                    ),
+                    child: Slider(
+                        value: height.toDouble(),
+                        min: 120.0,
+                        max: 220.0,
+                   
+                        onChanged: (double newValue) {
+                          setState(() {
+                            height = newValue.round();
+                          });
+                        }),
+                  )
                 ],
               ),
             ),
@@ -110,8 +125,7 @@ class _InputPageState extends State<InputPage> {
                   child: ReuseableCard(
                     colour: kBoxColor,
                     cardChild: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text('Weight', style: kTextStyle),
                         Row(
@@ -132,7 +146,6 @@ class _InputPageState extends State<InputPage> {
                     colour: kBoxColor,
                     cardChild: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-
                       children: <Widget>[
                         Text('Age', style: kTextStyle),
                         Row(
