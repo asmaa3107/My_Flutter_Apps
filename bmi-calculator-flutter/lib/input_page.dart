@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/widgets/roundedButton.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'widgets/reuseableCard_widget.dart';
@@ -19,6 +20,8 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
   int height = 180;
+  int weight = 80;
+  int age = 30;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +72,6 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           Expanded(
-            // flex: 2,
             child: ReuseableCard(
               colour: kBoxColor,
               cardChild: Column(
@@ -122,18 +124,38 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: <Widget>[
                 Expanded(
+                  
                   child: ReuseableCard(
+                    
                     colour: kBoxColor,
                     cardChild: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text('Weight', style: kTextStyle),
+                         Text(
+                              weight.toString(),
+                              style: kBigTextStyle,
+                            ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text(
-                              '180',
-                              style: kBigTextStyle,
+                          
+                            RoundedButton(
+                              icon: FontAwesomeIcons.minus,
+                              changeValue: (){
+                                setState(() {
+                                weight--;
+                                });
+                              },
+                            ),
+                            SizedBox(width: 15.0,),
+                             RoundedButton(
+                              icon: FontAwesomeIcons.plus,
+                               changeValue: (){
+                                setState(() {
+                                weight++;
+                                });
+                              },
                             ),
                           ],
                         )
@@ -148,12 +170,30 @@ class _InputPageState extends State<InputPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text('Age', style: kTextStyle),
-                        Row(
+                        Text(
+                              age.toString(),
+                              style: kBigTextStyle,
+                            ), 
+                            Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text(
-                              '180',
-                              style: kBigTextStyle,
+                             
+                            RoundedButton(
+                              icon: FontAwesomeIcons.minus,
+                              changeValue: (){
+                                setState(() {
+                                age--;
+                                });
+                              },
+                            ),
+                            SizedBox(width: 15.0,),
+                             RoundedButton(
+                              icon: FontAwesomeIcons.plus,
+                              changeValue: (){
+                                setState(() {
+                               age++;
+                                });
+                              },
                             ),
                           ],
                         )

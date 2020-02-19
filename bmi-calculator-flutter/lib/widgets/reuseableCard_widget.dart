@@ -11,10 +11,10 @@ final Widget cardChild;
     return GestureDetector(
       onTap: onSelected,
           child: Container(
-        margin: EdgeInsets.all(15.0),
+        margin: EdgeInsets.all(10.0),
         decoration: BoxDecoration(
             color: colour,
-            borderRadius: BorderRadius.circular(15.0),
+            borderRadius: BorderRadius.circular(10.0),
             ),
             child: this.cardChild,
       ),
