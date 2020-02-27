@@ -1,24 +1,17 @@
-import 'package:bmi_calculator/widgets/roundedButton.dart';
+import 'package:bmi_calculator/logic/calc_BMI.dart';
+import 'package:bmi_calculator/result_page.dart';
+import 'package:bmi_calculator/widgets/bottom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'widgets/reuseableCard_widget.dart';
 import 'widgets/icon_drawer_widget.dart';
 import 'package:bmi_calculator/constanses.dart';
-
+import 'package:bmi_calculator/widgets/roundedButton.dart';
 //widgets variables
-<<<<<<< HEAD
-const  double btnHight = 80.0;
-const  Color boxColor = Color(0xFF1D1F33);
-const  Color boxInactiveColor = Color(0xFF111328);
-const  Color secondryColor = Color(0xFFEB1555);
-enum Gender{
-  male,female,
-=======
 
 enum Gender {
   male,
   female,
->>>>>>> 49e7a850ae3e1f7be8d05d69c0c008095855b1d4
 }
 
 class InputPage extends StatefulWidget {
@@ -28,17 +21,13 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
-<<<<<<< HEAD
-  
- @override
-=======
   int height = 180;
   int weight = 80;
   int age = 30;
   @override
->>>>>>> 49e7a850ae3e1f7be8d05d69c0c008095855b1d4
   Widget build(BuildContext context) {
     return Scaffold(
+    
       //  backgroundColor:Theme.of(context).primaryColor,
       appBar: AppBar(
         title: Text('BMI CALCULATOR'),
@@ -50,39 +39,6 @@ class _InputPageState extends State<InputPage> {
             // flex: 1,
             child: Row(
               children: <Widget>[
-<<<<<<< HEAD
-              Expanded( 
-                  child:  GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedGender=Gender.male;
-                    });
-                  },
-                    child: ReuseableCard(
-                      colour:selectedGender == Gender.male ? boxColor : boxInactiveColor , 
-                       cardChild:IconDrawer(
-                        lable: 'Male',
-                        icon:FontAwesomeIcons.mars ,
-                        ),
-                      ),
-                  ),
-                ),
-              
-                   Expanded(
-                     child:  GestureDetector(
-                 onTap: () {
-                    setState(() {
-                      selectedGender=Gender.female;
-                    });
-                  },
-                    child: ReuseableCard( 
-                     colour:selectedGender == Gender.female ? boxColor : boxInactiveColor , 
-                      cardChild:  
-                      IconDrawer(
-                        lable: 'Female',
-                        icon:FontAwesomeIcons.venus ,),
-                     ),
-=======
                 Expanded(
                   child: ReuseableCard(
                     onSelected: () {
@@ -113,7 +69,6 @@ class _InputPageState extends State<InputPage> {
                         selectedGender = Gender.female;
                       });
                     },
->>>>>>> 49e7a850ae3e1f7be8d05d69c0c008095855b1d4
                   ),
                 ),
               ],
@@ -252,22 +207,26 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: kSecondryColor,
-            margin: EdgeInsets.only(top: 10.0),
-            height: kBtnHight,
-            width: double.infinity,
-            child: Center(
-              child: Text(
-                'Calculate Your BMI'.toUpperCase(),
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 25.0,
-                  // fontFamily:
-                ),
-              ),
-            ),
-          ),
+      
+   BottomButton(btnText: 'Calculate Your BMI'.toUpperCase(),
+   ontap: (){
+        CalculateBMI calc= CalculateBMI(height: this.height,weight: this.weight);
+        
+        //in case i need to send parameter to net screen
+        Navigator.push(context,
+        MaterialPageRoute(
+          builder:
+           (context)=>
+           ResultPage(
+       
+        bmirslt:calc.calcBMI() ,
+        bmiTextrslt :calc.bmiResult(),
+        bmiInterpretation:calc.bmiAdvivce()
+
+           ),),
+           );
+        //Navigator.pushNamed(context, '/resultpage');
+      },),
         ],
       ),
     );
@@ -298,40 +257,6 @@ class _InputPageState extends State<InputPage> {
 //   }
 // }
 
-<<<<<<< HEAD
-// if(selectedGender == Gender.male) ? '' : ';
-//   Color maleCardCoulor   = boxInactiveColor;
-//   Color femaleCardCoulor = boxInactiveColor;
-//   //1 for male 2 for woman insted of lots of comments use enum instead
-// void updateColor(Gender gender){
-//   if (gender== Gender.male){
-//     if (maleCardCoulor== boxInactiveColor)
-//          { maleCardCoulor=boxColor;
-//           femaleCardCoulor=boxInactiveColor;}
-//     else maleCardCoulor = boxInactiveColor;
-//   }
-//   else if(gender==Gender.female){
-//  if (femaleCardCoulor== boxInactiveColor)
-//         {  femaleCardCoulor=boxColor;
-//           maleCardCoulor=boxInactiveColor;
-//         }
-//     else femaleCardCoulor = boxInactiveColor;
-//   }
-// }
-
-  // const ReuseableCard({
-  //   Key key,
-  // }) : super(key: key);
-// note! using key to trace widget لو هعمل انيمشان مثلا وعايزه اسليكت الودجت ديه 
-
-      // floatingActionButton: FloatingActionButton(
-      //   backgroundColor: Theme.of(context).accentColor,
-      //   child: Icon(
-      //     Icons.add,
-      //     color: Colors.white,
-      //   ),
-      // ),
-=======
 // const ReuseableCard({
 //   Key key,
 // }) : super(key: key);
@@ -344,4 +269,3 @@ class _InputPageState extends State<InputPage> {
 //     color: Colors.white,
 //   ),
 // ),
->>>>>>> 49e7a850ae3e1f7be8d05d69c0c008095855b1d4
