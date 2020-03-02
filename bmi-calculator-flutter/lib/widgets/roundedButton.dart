@@ -18,8 +18,8 @@ final Function changeValue;
       elevation: 6.0,
       fillColor: Colors.grey,
       constraints: BoxConstraints.tightFor(
-        height: 56.0,
-        width: 56.0,
+        height: 46.0,
+        width: 46.0,
        ),
        shape: CircleBorder(),
     );
