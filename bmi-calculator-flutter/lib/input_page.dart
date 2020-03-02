@@ -1,10 +1,12 @@
-import 'package:bmi_calculator/widgets/roundedButton.dart';
+import 'package:bmi_calculator/logic/calc_BMI.dart';
+import 'package:bmi_calculator/result_page.dart';
+import 'package:bmi_calculator/widgets/bottom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'widgets/reuseableCard_widget.dart';
 import 'widgets/icon_drawer_widget.dart';
 import 'package:bmi_calculator/constanses.dart';
-
+import 'package:bmi_calculator/widgets/roundedButton.dart';
 //widgets variables
 
 enum Gender {
@@ -25,6 +27,7 @@ class _InputPageState extends State<InputPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+    
       //  backgroundColor:Theme.of(context).primaryColor,
       appBar: AppBar(
         title: Text('BMI CALCULATOR'),
@@ -204,22 +207,26 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: kSecondryColor,
-            margin: EdgeInsets.only(top: 10.0),
-            height: kBtnHight,
-            width: double.infinity,
-            child: Center(
-              child: Text(
-                'Calculate Your BMI'.toUpperCase(),
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 25.0,
-                  // fontFamily:
-                ),
-              ),
-            ),
-          ),
+      
+   BottomButton(btnText: 'Calculate Your BMI'.toUpperCase(),
+   ontap: (){
+        CalculateBMI calc= CalculateBMI(height: this.height,weight: this.weight);
+        
+        //in case i need to send parameter to net screen
+        Navigator.push(context,
+        MaterialPageRoute(
+          builder:
+           (context)=>
+           ResultPage(
+       
+        bmirslt:calc.calcBMI() ,
+        bmiTextrslt :calc.bmiResult(),
+        bmiInterpretation:calc.bmiAdvivce()
+
+           ),),
+           );
+        //Navigator.pushNamed(context, '/resultpage');
+      },),
         ],
       ),
     );
